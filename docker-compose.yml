@@ -1,0 +1,8 @@
+services:
+  dev:
+    image: ghcr.io/wayflyer/devcontainer:jammy-dev
+    volumes:
+      - wf-state:/opt/wf-state
+volumes:
+  wf-state:
+    external: true
