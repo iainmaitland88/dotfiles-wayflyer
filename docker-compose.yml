@@ -1,6 +1,6 @@
 services:
   dev:
-    image: ghcr.io/wayflyer/devcontainer:jammy-dev
+    image: ghcr.io/wayflyer/devcontainer:kinetic-dev
     volumes:
       - wf-state:/opt/wf-state
 volumes:
