@@ -61,12 +61,12 @@ if not status then
   print("colorscheme not found")
 end
 
-local status, _ = pcall(require, "nvim-tree")
+status, _ = pcall(require, "nvim-tree")
 if status then
   nvimtree.setup()
 end
 
-local status, _ = pcall(require, "lualine")
+status, _ = pcall(require, "lualine")
 if status then
   lualine.setup()
 end
