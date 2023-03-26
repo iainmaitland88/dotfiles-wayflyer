@@ -88,6 +88,18 @@ nvimtreesitterconfigs.setup {
 }
 end
 
+local status, telescope = pcall(require, "telescope")
+if status then
+  telescope.load_extension("fzf")
+  local builtin = require('telescope.builtin')
+  vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+  vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+  vim.keymap.set('n', '<leader>fs', builtin.grep_string, {})
+  vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+  vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+end
+
+
 -- packer
 local ensure_packer = function()
   local fn = vim.fn
@@ -135,6 +147,14 @@ return require('packer').startup({function(use)
           local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
           ts_update()
       end,
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  }
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    requires = { {'nvim-lua/plenary.nvim'} }
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
