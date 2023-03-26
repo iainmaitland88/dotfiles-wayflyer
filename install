@@ -16,6 +16,11 @@ def update_package_lists():
 def install_tree():
     _run("apt install tree -y")
 
+def install_ripgrep():
+    # recommended for neovim-telescope
+    # https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies
+    _run("apt install ripgrep -y")
+
 def install_neovim():
     # https://github.com/neovim/neovim/wiki/Building-Neovim
     _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
@@ -30,6 +35,7 @@ def install_dotfiles():
 def main() -> None:
     update_package_lists()
     install_tree()
+    install_ripgrep()
     install_neovim()
     install_dotfiles()
 
