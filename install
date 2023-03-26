@@ -4,9 +4,9 @@ from pathlib import Path
 import subprocess
 import shutil
 
-def _run(command: str):
+def _run(command: str, **kwargs):
     print(f"> {command}")
-    p = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True, encoding="utf-8")
+    p = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True, encoding="utf-8", **kwargs)
     print(p.stdout)
     return p
 
@@ -17,7 +17,12 @@ def install_tree():
     _run("apt install tree -y")
 
 def install_neovim():
-    _run("apt install luajit neovim -y")
+    # https://github.com/neovim/neovim/wiki/Building-Neovim
+    _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
+    _run("git clone https://github.com/neovim/neovim", cwd="/root/")
+    _run("make CMAKE_BUILD_TYPE=Release", cwd="/root/neovim/neovim/")
+    _run("make install", cwd="/root/neovim/neovim/")
+
 
 def install_dotfiles():
     shutil.copytree(Path(Path.home() / "dotfiles/dotfiles"), Path.home(), dirs_exist_ok=True)
@@ -25,6 +30,7 @@ def install_dotfiles():
 def main() -> None:
     update_package_lists()
     install_tree()
+    install_neovim()
     install_dotfiles()
 
 if __name__ == "__main__":
