@@ -56,6 +56,10 @@ keymap.set("n", "<leader>tx", ":tabclose<CR>")
 keymap.set("n", "<leader>tn", ":tabnext<CR>")
 keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 
+-- plugin keymappings
+keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+
+-- setup plugins
 pcall(vim.cmd, "colorscheme nightfly")
 
 local status, nvimtree = pcall(require, "nvim-tree")
@@ -68,6 +72,23 @@ if status then
   lualine.setup()
 end
 
+local status, nvimtreesitterconfigs = pcall(require, "nvim-treesitter.configs")
+if status then
+nvimtreesitterconfigs.setup {
+  -- A list of parser names, or "all" (the five listed parsers should always be installed)
+  ensure_installed = { "json", "yaml", "toml", "dockerfile", "gitignore", "javascript", "typescript", "tsx", "lua", "python", },
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = false,
+
+  highlight = {
+    enable = true,
+  },
+}
+end
+
+-- packer
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
