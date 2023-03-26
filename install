@@ -25,7 +25,6 @@ def install_dotfiles():
 def main() -> None:
     update_package_lists()
     install_tree()
-    install_neovim()
     install_dotfiles()
 
 if __name__ == "__main__":
