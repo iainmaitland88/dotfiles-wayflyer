@@ -17,7 +17,7 @@ def install_tree():
     _run("apt install tree -y")
 
 def install_neovim():
-    _run("apt install neovim -y")
+    _run("apt install luajit neovim -y")
 
 def install_dotfiles():
     shutil.copytree(Path(Path.home() / "dotfiles/dotfiles"), Path.home(), dirs_exist_ok=True)
