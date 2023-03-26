@@ -56,10 +56,9 @@ keymap.set("n", "<leader>tx", ":tabclose<CR>")
 keymap.set("n", "<leader>tn", ":tabnext<CR>")
 keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 
-local status, _ = pcall(vim.cmd("colorscheme nightfly")
+local status, _ = pcall(vim.cmd, "colorscheme nightfly")
 if not status then
   print("colorscheme not found")
-  return
 end
 
 local ensure_packer = function()
