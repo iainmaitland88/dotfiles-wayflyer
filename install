@@ -20,8 +20,8 @@ def install_neovim():
     # https://github.com/neovim/neovim/wiki/Building-Neovim
     _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
     _run("git clone https://github.com/neovim/neovim", cwd="/root/")
-    _run("make CMAKE_BUILD_TYPE=Release", cwd="/root/neovim/neovim/")
-    _run("make install", cwd="/root/neovim/neovim/")
+    _run("make CMAKE_BUILD_TYPE=Release", cwd="/root/neovim/")
+    _run("make install", cwd="/root/neovim/")
 
 
 def install_dotfiles():
