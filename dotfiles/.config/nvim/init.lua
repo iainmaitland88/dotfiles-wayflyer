@@ -61,6 +61,16 @@ if not status then
   print("colorscheme not found")
 end
 
+local status, _ = pcall(require, "nvim-tree")
+if status then
+  nvimtree.setup()
+end
+
+local status, _ = pcall(require, "lualine")
+if status then
+  lualine.setup()
+end
+
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -76,7 +86,36 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  use 'nvim-lua/plenary.nvim'
   use 'bluz71/vim-nightfly-guicolors'
+  use 'christoomey/vim-tmux-navigator'
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional
+    },
+  }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+     run = ':TSUpdate'
+  }
+  end
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
