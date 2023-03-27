@@ -109,6 +109,24 @@ if status then
   vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 end
 
+local status, lspzero = pcall(require, "lsp-zero")
+if status then
+  lspzero.preset({
+    name = 'minimal',
+    set_lsp_keymaps = true,
+    manage_nvim_cmp = true,
+    suggest_lsp_servers = false,
+  })
+
+  -- When you don't have mason.nvim installed
+  -- You'll need to list the servers installed in your system
+  lspzero.ensure_installed({"pyright", "tsserver"})
+
+  -- (Optional) Configure lua language server for neovim
+  lspzero.nvim_workspace()
+
+  lspzero.setup()
+end
 
 -- packer
 local ensure_packer = function()
@@ -165,6 +183,29 @@ return require('packer').startup({function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  -- try coq some time (lol) https://github.com/ms-jpq/coq_nvim
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v1.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {'williamboman/mason.nvim'},           -- Optional
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},         -- Required
+      {'hrsh7th/cmp-nvim-lsp'},     -- Required
+      {'hrsh7th/cmp-buffer'},       -- Optional
+      {'hrsh7th/cmp-path'},         -- Optional
+      {'saadparwaiz1/cmp_luasnip'}, -- Optional
+      {'hrsh7th/cmp-nvim-lua'},     -- Optional
+
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},             -- Required
+      {'rafamadriz/friendly-snippets'}, -- Optional
+    }
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
