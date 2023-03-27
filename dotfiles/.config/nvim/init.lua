@@ -60,6 +60,7 @@ keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 keymap.set("n", "<leader>gg", vim.cmd.Git)
+keymap.set("n", "<leader>-", ":ChooseWin")
 
 -- setup plugins
 pcall(vim.cmd, "colorscheme nightfly")
@@ -130,6 +131,7 @@ return require('packer').startup({function(use)
   use 'christoomey/vim-tmux-navigator'
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
+  use 't9md/vim-choosewin'
   use {
       'numToStr/Comment.nvim',
       config = function()
