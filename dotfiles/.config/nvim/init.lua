@@ -128,6 +128,7 @@ return require('packer').startup({function(use)
   use 'bluz71/vim-nightfly-guicolors'
   use 'christoomey/vim-tmux-navigator'
   use 'mbbill/undotree'
+  use 'tpope/vim-fugitive'
   use {
       'numToStr/Comment.nvim',
       config = function()
