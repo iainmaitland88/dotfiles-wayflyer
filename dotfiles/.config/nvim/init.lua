@@ -58,6 +58,7 @@ keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 
 -- plugin keymappings
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- setup plugins
 pcall(vim.cmd, "colorscheme nightfly")
@@ -126,6 +127,7 @@ return require('packer').startup({function(use)
   use 'nvim-lua/plenary.nvim'
   use 'bluz71/vim-nightfly-guicolors'
   use 'christoomey/vim-tmux-navigator'
+  use 'mbbill/undotree'
   use {
       'numToStr/Comment.nvim',
       config = function()
