@@ -161,10 +161,7 @@ return require('packer').startup({function(use)
           ts_update()
       end,
   }
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     requires = { {'nvim-lua/plenary.nvim'} }
