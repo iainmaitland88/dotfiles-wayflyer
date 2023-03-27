@@ -22,6 +22,7 @@ def install_ripgrep():
     _run("apt install ripgrep -y")
 
 def install_neovim():
+    # TODO checkout 0.8 release instead of nightly
     # https://github.com/neovim/neovim/wiki/Building-Neovim
     _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
     _run("git clone https://github.com/neovim/neovim", cwd="/root/")
