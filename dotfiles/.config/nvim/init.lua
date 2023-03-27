@@ -59,6 +59,7 @@ keymap.set("n", "<leader>tp", ":tabprevious<CR>")
 -- plugin keymappings
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+keymap.set("n", "<leader>gg", vim.cmd.Git)
 
 -- setup plugins
 pcall(vim.cmd, "colorscheme nightfly")
