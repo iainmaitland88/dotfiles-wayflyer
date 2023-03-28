@@ -39,7 +39,7 @@ def install_neovim():
     # https://github.com/neovim/neovim/wiki/Building-Neovim
     with TemporaryDirectory() as tempdir:
         _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
-        _run(f"git clone https://github.com/neovim/neovim {tmpdir}")
+        _run(f"git clone https://github.com/neovim/neovim {tempdir}")
         _run(f"make CMAKE_BUILD_TYPE=Release", cwd=tempdir)
         _run(f"make CMAKE_INSTALL_PREFIX={install_dir} install", cwd=tempdir)
 
