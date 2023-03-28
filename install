@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import subprocess
 import shutil
-from tempdir import TemporaryDirectory
+from tempfile import TemporaryDirectory
 
 def _run(command: str, **kwargs):
     # TODO make this print to STDOUT in realtime
