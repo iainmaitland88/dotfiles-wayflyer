@@ -3,8 +3,10 @@ import os
 from pathlib import Path
 import subprocess
 import shutil
+from tempdir import TemporaryDirectory
 
 def _run(command: str, **kwargs):
+    # TODO make this print to STDOUT in realtime
     print(f"> {command}")
     p = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True, encoding="utf-8", **kwargs)
     print(p.stdout)
@@ -24,10 +26,21 @@ def install_ripgrep():
 def install_neovim():
     # TODO checkout 0.8 release instead of nightly
     # https://github.com/neovim/neovim/wiki/Building-Neovim
-    _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
-    _run("git clone https://github.com/neovim/neovim", cwd="/root/")
-    _run("make CMAKE_BUILD_TYPE=Release", cwd="/root/neovim/")
-    _run("make install", cwd="/root/neovim/")
+
+    # make sure install directory exists
+    install_dir = Path(os.environ.get("WF_STATE_DIR", "/usr/local/")) / "neovim"
+    install_dir.mkdir(exists_ok=True)
+
+    # check if neovim is already installed
+    if Path(install_dir / "bin/nvim").exists():
+        return
+
+    with TemporaryDirectory() as tempdir:
+        # install neovim
+        _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
+        _run("git clone https://github.com/neovim/neovim", cwd=tempdir)
+        _run(f"make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS='-DCMAKE_INSTALL_PREFIX={install_dir}'", cwd=tempdir)
+        _run("make install", cwd=tempdir)
 
 
 def install_dotfiles():
