@@ -29,7 +29,7 @@ def install_neovim():
 
     # make sure install directory exists
     install_dir = Path(os.environ.get("WF_STATE_DIR", "/usr/local/")) / "neovim"
-    install_dir.mkdir(exists_ok=True)
+    install_dir.mkdir(exist_ok=True)
 
     # check if neovim is already installed
     if Path(install_dir / "bin/nvim").exists():
