@@ -35,12 +35,13 @@ def install_neovim():
     if Path(install_dir / "bin/nvim").exists():
         return
 
+    # install neovim 🚀
+    # https://github.com/neovim/neovim/wiki/Building-Neovim
     with TemporaryDirectory() as tempdir:
-        # install neovim
         _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
-        _run("git clone https://github.com/neovim/neovim", cwd=tempdir)
-        _run(f"make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS='-DCMAKE_INSTALL_PREFIX={install_dir}'", cwd=tempdir)
-        _run("make install", cwd=tempdir)
+        _run(f"git clone https://github.com/neovim/neovim {tmpdir}")
+        _run(f"make CMAKE_BUILD_TYPE=Release", cwd=tempdir)
+        _run(f"make CMAKE_INSTALL_PREFIX={install_dir} install", cwd=tempdir)
 
 
 def install_dotfiles():
