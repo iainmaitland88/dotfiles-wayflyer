@@ -43,12 +43,6 @@ def install_neovim():
         _run(f"make CMAKE_BUILD_TYPE=Release", cwd=tempdir)
         _run(f"make CMAKE_INSTALL_PREFIX={install_dir} install", cwd=tempdir)
 
-def install_tpm():
-    # install Tmux Plugin Manager
-    # https://github.com/tmux-plugins/tpm
-
-    # in future can maybe install in /opt/wf-state/ to avoid running on every container build?
-    _run("git clone https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm")
 
 def install_dotfiles():
     shutil.copytree(Path(Path.home() / "dotfiles/dotfiles"), Path.home(), dirs_exist_ok=True)
@@ -58,7 +52,6 @@ def main() -> None:
     install_tree()
     install_ripgrep()
     install_neovim()
-    install_tpm()
     install_dotfiles()
 
 if __name__ == "__main__":
