@@ -45,7 +45,8 @@ def install_neovim():
 
 
 def install_dotfiles():
-    shutil.copytree(Path(Path.home() / "dotfiles-wayflyer/dotfiles-public/dotfiles"), Path.home(), dirs_exist_ok=True)
+    _run("git submodule update --init", cwd="/root/dotfiles")
+    shutil.copytree(Path(Path.home() / "dotfiles/dotfiles-public/dotfiles"), Path.home(), dirs_exist_ok=True)
 
 def main() -> None:
     update_package_lists()
