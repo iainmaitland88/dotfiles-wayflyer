@@ -1,0 +1,3 @@
+[submodule "dotfiles-public"]
+	path = dotfiles-public
+	url = git@github.com:iainmaitland88/dotfiles-public.git
