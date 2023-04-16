@@ -47,13 +47,14 @@ def install_neovim():
 def install_dotfiles():
     _run("git submodule update --init", cwd="/root/dotfiles")
 
-    dotfiles = [".config/nvim/init.lua"]
+    dotfiles = [".config/nvim"]
 
     for dotfile in dotfiles:
+        dest = Path.home() / dotfile
         if (source := Path() / "dotfiles-public/dotfiles" / dotfile).is_dir():
-            shutil.copytree(source, Path.home(), dirs_exist_ok=True)
+            shutil.copytree(source, dest, dirs_exist_ok=True)
         else:
-            shutil.copyfile(source, Path.home() / dotfile)
+            shutil.copyfile(source, dest)
 
 def main() -> None:
     update_package_lists()
