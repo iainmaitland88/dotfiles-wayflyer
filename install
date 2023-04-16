@@ -43,6 +43,11 @@ def install_neovim():
         _run(f"make CMAKE_BUILD_TYPE=Release", cwd=tempdir)
         _run(f"make CMAKE_INSTALL_PREFIX={install_dir} install", cwd=tempdir)
 
+    # add nvim to Path
+    # TODO change this if ever use a different shell like zsh
+    with open(Path.home() / ".bashrc", "a") as f:
+        f.write(f'export PATH="$PATH:/opt/wf-state/neovim/bin/nvim\n"')
+
 
 def install_dotfiles():
     _run("git submodule update --init", cwd="/root/dotfiles")
