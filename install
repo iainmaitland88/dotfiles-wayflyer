@@ -40,7 +40,7 @@ def install_neovim():
     # add nvim to Path
     # TODO change this if ever use a different shell like zsh
     with open(Path.home() / ".bashrc", "a") as f:
-        f.write(f'export PATH="$PATH:/opt/wf-state/neovim/bin/nvim"\n')
+        f.write(f'export PATH="$PATH:/opt/wf-state/neovim/bin"\n')
 
 
 def install_dotfiles():
