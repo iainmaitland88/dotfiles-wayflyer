@@ -60,7 +60,7 @@ def main() -> None:
     install_tree()
     install_ripgrep()
     install_neovim()
-    # install_dotfiles()
+    install_dotfiles()
 
 if __name__ == "__main__":
     main()
