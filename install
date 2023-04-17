@@ -24,29 +24,23 @@ def install_ripgrep():
     _run("apt install ripgrep -y")
 
 def install_neovim():
-    # TODO checkout 0.8 release instead of nightly
-    # https://github.com/neovim/neovim/wiki/Building-Neovim
-
     # make sure install directory exists
     install_dir = Path(os.environ.get("WF_STATE_DIR", "/usr/local/")) / "neovim"
     install_dir.mkdir(exist_ok=True)
 
-    # check if neovim is already installed
-    if Path(install_dir / "bin/nvim").exists():
-        return
-
-    # install neovim 🚀
-    # https://github.com/neovim/neovim/wiki/Building-Neovim
-    with TemporaryDirectory() as tempdir:
-        _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
-        _run(f"git clone https://github.com/neovim/neovim {tempdir}")
-        _run(f"make CMAKE_BUILD_TYPE=Release", cwd=tempdir)
-        _run(f"make CMAKE_INSTALL_PREFIX={install_dir} install", cwd=tempdir)
+    # install neovim (only if it's not already installed)
+    if not Path(install_dir / "bin/nvim").exists():
+        # https://github.com/neovim/neovim/wiki/Building-Neovim
+        with TemporaryDirectory() as tempdir:
+            _run("apt install -y luajit ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl")
+            _run(f"git clone https://github.com/neovim/neovim {tempdir}")
+            _run(f"make CMAKE_BUILD_TYPE=Release", cwd=tempdir)
+            _run(f"make CMAKE_INSTALL_PREFIX={install_dir} install", cwd=tempdir)
 
     # add nvim to Path
     # TODO change this if ever use a different shell like zsh
     with open(Path.home() / ".bashrc", "a") as f:
-        f.write(f'export PATH="$PATH:/opt/wf-state/neovim/bin/nvim\n"')
+        f.write(f'export PATH="$PATH:/opt/wf-state/neovim/bin/nvim"\n')
 
 
 def install_dotfiles():
