@@ -23,6 +23,10 @@ def install_ripgrep():
     # https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies
     _run("apt install ripgrep -y")
 
+def install_tpm():
+    # https://github.com/tmux-plugins/tpm
+    _run("git clone https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm")
+
 def install_neovim():
     # make sure install directory exists
     install_dir = Path(os.environ.get("WF_STATE_DIR", "/usr/local/")) / "neovim"
@@ -59,6 +63,7 @@ def main() -> None:
     update_package_lists()
     install_tree()
     install_ripgrep()
+    install_tpm()
     install_neovim()
     install_dotfiles()
 
