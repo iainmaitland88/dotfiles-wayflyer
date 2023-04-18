@@ -46,7 +46,7 @@ def install_neovim():
 def install_dotfiles():
     _run("git submodule update --init", cwd="/root/dotfiles")
 
-    dotfiles = [".config/nvim"]
+    dotfiles = [".config/nvim", ".tmux.conf"]
 
     for dotfile in dotfiles:
         dest = Path.home() / dotfile
