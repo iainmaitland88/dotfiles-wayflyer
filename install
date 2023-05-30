@@ -15,13 +15,8 @@ def _run(command: str, **kwargs):
 def update_package_lists():
     _run("apt update")
 
-def install_tree():
-    _run("apt install tree -y")
-
-def install_ripgrep():
-    # recommended for neovim-telescope
-    # https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies
-    _run("apt install ripgrep -y")
+def install_extra_deps():
+    _run("apt install tree ripgrep parallel -y")
 
 def install_tpm():
     # https://github.com/tmux-plugins/tpm
@@ -61,8 +56,7 @@ def install_dotfiles():
 
 def main() -> None:
     update_package_lists()
-    install_tree()
-    install_ripgrep()
+    install_extra_deps()
     install_tpm()
     install_neovim()
     install_dotfiles()
