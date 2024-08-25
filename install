@@ -56,7 +56,7 @@ def install_dotfiles():
 
     for dotfile in dotfiles:
         dest = Path.home() / dotfile
-        if (source := Path.home() / "dotfiles/dotfiles-public/dotfiles" / dotfile).is_dir():
+        if (source := Path.home() / "dotfiles/dotfiles-public" / dotfile).is_dir():
             shutil.copytree(source, dest, dirs_exist_ok=True)
         else:
             shutil.copyfile(source, dest)
