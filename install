@@ -13,16 +13,20 @@ def _run(command: str, **kwargs):
     return p
 
 def update_package_lists():
+    print("Updating list of available packages and their versions")
     _run("apt update")
 
 def install_extra_deps():
+    print("Installing extra utils like tree, ripgrep, parallel")
     _run("apt install tree ripgrep parallel -y")
 
 def install_tpm():
+    print("Installing TPM")
     # https://github.com/tmux-plugins/tpm
     _run("git clone https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm")
 
 def install_neovim():
+    print("Installing Neovim")
     # make sure install directory exists
     install_dir = Path(os.environ.get("WF_STATE_DIR", "/usr/local/")) / "neovim"
     install_dir.mkdir(exist_ok=True)
@@ -43,6 +47,7 @@ def install_neovim():
 
 
 def install_dotfiles():
+    print("Installing dotfils")
     _run("git submodule update --init", cwd="/root/dotfiles")
 
     dotfiles = [".config/nvim", ".tmux.conf"]
